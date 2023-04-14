@@ -15,11 +15,18 @@
 
 default_platform(:ios)
 
-#platform :ios do
-#  desc "Description of what the lane does"
-#  lane :custom_lane do
-#    # add actions here: https://docs.fastlane.tools/actions
-#  end
+platform :ios do
+ desc "Load ASC API Key information to use in subsequent lanes"
+ lane :load_asc_api_key do
+   app_store_connect_api_key(
+     key_id: ENV["ASC_KEY_ID"],
+     issuer_id: ENV["ASC_ISSUER_ID"],
+     key_content: ENV["ASC_KEY"],
+     is_key_content_base64: true,
+     in_house: false # detecting this via ASC private key not currently supported
+   )
+ end
+end
 
   desc "Build and upload to TestFlight"
   lane :build_upload_testflight do
@@ -129,4 +136,3 @@ default_platform(:ios)
          run_precheck_before_submit: false # not supported through ASC API yet
      )
   end
-end
