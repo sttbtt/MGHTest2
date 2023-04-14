@@ -26,7 +26,6 @@ platform :ios do
      in_house: false # detecting this via ASC private key not currently supported
    )
  end
-end
 
   desc "Build and upload to TestFlight"
   lane :build_upload_testflight do
@@ -136,3 +135,4 @@ end
          run_precheck_before_submit: false # not supported through ASC API yet
      )
   end
+end
